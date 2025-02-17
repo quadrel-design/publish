@@ -44,6 +44,7 @@ jobs:
         run: pnpm install
 
       - name: Setup Pages
+        id: setup_pages
         uses: actions/configure-pages@v5
 
       - name: Restore cache
@@ -60,7 +61,7 @@ jobs:
       - name: Build with Next.js
         run: pnpm run build
         env:
-          GITHUB_REPO_NAME: ${{ github.event.repository.name }}
+          PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
